@@ -21,11 +21,23 @@ with open(budget_csvpath) as csvfile:
         if previousrevenue != 0:
             changeinrevenue = int(row[1]) - previousrevenue
             revenue_change += [changeinrevenue]
+            monthofchange += [row[0]]
         previousrevenue = int(row[1])
-        monthofchange += [row[0]]
+        
 
 avgrevenue = round(sum(revenue_change) / len(revenue_change), 2)
-    
+
+maxchange = max(revenue_change)
+minchange = min(revenue_change)
+
+bestmonth_index = revenue_change.index(maxchange)
+bestmonth = monthofchange[bestmonth_index]
+
+worstmonth_index = revenue_change.index(minchange)
+worstmonth = monthofchange[worstmonth_index]
+
 print(f"Total Months: {countmonths}")
-print(f"Total_Profit: {totalrevenue}")
+print(f"Total_Profit: ${totalrevenue}")
 print(f"Average Revenue Change: ${avgrevenue}")
+print(f"Greatest Increase in Profits: {bestmonth} ${maxchange}")
+print(f"Greatest Decrease in Profits: {worstmonth} ${minchange}")
