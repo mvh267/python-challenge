@@ -4,20 +4,28 @@ import csv
 budget_csvpath = os.path.join("Resources", "budget_data.csv")
 
 months = []
-profit = []
-
-count_months = 0
-net_profit = 0
+revenue_change = []
+monthofchange = []
+countmonths = 0
+totalrevenue = 0
+previousrevenue = 0
 
 with open(budget_csvpath) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
     csvheader = next(csvfile)
     
     for row in csvreader:
-        count_months += 1
-        net_profit = net_profit + int(row[1])
+        countmonths += 1
+        totalrevenue = totalrevenue + int(row[1])
         
-        
+        if previousrevenue != 0:
+            changeinrevenue = int(row[1]) - previousrevenue
+            revenue_change += [changeinrevenue]
+        previousrevenue = int(row[1])
+        monthofchange += [row[0]]
 
-print(f"Total Months: {count_months}")
-print(f"Total_Profit: {net_profit}")
+avgrevenue = round(sum(revenue_change) / len(revenue_change), 2)
+    
+print(f"Total Months: {countmonths}")
+print(f"Total_Profit: {totalrevenue}")
+print(f"Average Revenue Change: ${avgrevenue}")
