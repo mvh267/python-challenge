@@ -36,17 +36,21 @@ bestmonth = monthofchange[bestmonth_index]
 worstmonth_index = revenue_change.index(minchange)
 worstmonth = monthofchange[worstmonth_index]
 
+print("Financial Analysis")
+print("----------------------------")
 print(f"Total Months: {countmonths}")
 print(f"Total_Profit: ${totalrevenue}")
 print(f"Average Revenue Change: ${avgrevenue}")
-print(f"Greatest Increase in Profits: {bestmonth} ${maxchange}")
-print(f"Greatest Decrease in Profits: {worstmonth} ${minchange}")
+print(f"Greatest Increase in Profits: {bestmonth} (${maxchange})")
+print(f"Greatest Decrease in Profits: {worstmonth} (${minchange})")
 
 output_file = "Output/budget_data.txt"
 with open(output_file,'w') as writer:
 
+    writer.write(f"Financial Analysis\n")
+    writer.write(f"----------------------------")
     writer.write(f"Total Months: {countmonths}\n")
     writer.write(f"Total_Profit: ${totalrevenue}\n")
     writer.write(f"Average Revenue Change: ${avgrevenue}\n")
-    writer.write(f"Greatest Increase in Profits: {bestmonth} ${maxchange}\n")
-    writer.write(f"Greatest Decrease in Profits: {worstmonth} ${minchange}\n")
+    writer.write(f"Greatest Increase in Profits: {bestmonth} (${maxchange})\n")
+    writer.write(f"Greatest Decrease in Profits: {worstmonth} (${minchange})\n")
